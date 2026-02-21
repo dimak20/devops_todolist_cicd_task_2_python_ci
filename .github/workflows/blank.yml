@@ -16,9 +16,9 @@ on:
 jobs:
   python-ci:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./src
+    # defaults:
+    #   run:
+    #     working-directory: ./src
 
     steps:
       - uses: actions/checkout@v4
@@ -36,7 +36,10 @@ jobs:
 
       - name: Run tests
         run: |
-          coverage run --source='.' manage.py test
+          coverage run --source='./src' ./src/manage.py test
+
+      - name: Generate coverage report
+        run: |
           coverage report -m
 
       - name: Run linting
